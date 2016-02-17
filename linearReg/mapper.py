@@ -38,8 +38,10 @@ B = inverse(A) * b
 import sys
 import pandas as pd
 import numpy as np
+import os
 
-data = pd.read_csv("linearReg/trainNew.csv", sep = "\t" )
+dirLoc = os.path.dirname(os.path.realpath(__file__))
+data = pd.read_csv(dirLoc + "/trainNew.csv", sep = "\t" )
 dataM = np.matrix(data)
 
 # need to functionalize

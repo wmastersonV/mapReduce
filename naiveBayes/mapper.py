@@ -1,16 +1,24 @@
 #!/usr/bin/python
+'''
+given features, what is the probability of Y?
+p(Y | x) = p(x | Y) p(Y) / P(x)
+p(Y | x) = p(x | Y) p(Y) / [ p(x | Y) p(Y) + p(x | not-Y) p(not-Y)]
+this mapper emits tuples that are used for predictions on a pre-specified feature set.
+As an example, Y and X are initialized as first row from input dataset
 
-# given features, what is the probability of Y?
-# p(Y | x) ~ p(x | Y) p(Y) / [ p(x | Y) p(Y) + p(x | not-Y) p(not-Y)]
-# this mapper emits tuples that are used for predictions on a pre-specified feature set
-# testfile | ./mapper.py
+to calculate final prediction, take the output from the reducer and apply:
+p(Y | x) = tupple(x|Y) * tupple(Y) / tupple(X)
+'''
+
 
 import sys
 import pandas as pd
 import numpy as np
+import os
 
-dfY = pd.read_csv("naiveBayes/trainDependant.csv", sep = "\t")
-dfX = pd.read_csv("naiveBayes/trainIndependant.csv", sep = "\t")
+dirLoc = os.path.dirname(os.path.realpath(__file__))
+dfY = pd.read_csv(dirLoc + "/trainDependant.csv", sep = "\t")
+dfX = pd.read_csv(dirLoc +  "/trainIndependant.csv", sep = "\t")
 
 # initialize Y, X in example:
 predInput = dfY.iloc[1,:]
