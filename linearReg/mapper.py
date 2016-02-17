@@ -1,10 +1,37 @@
 #!/usr/bin/python
 
-# Format of each line is:
-# date\ttime\tstore name\titem description\tcost\tmethod of payment
-#
-# We want elements 2 (store name) and 4 (cost)
-# We need to write them out to standard output, separated by a tab
+'''
+formula:
+y = BX
+y = B0 + B1 * x1 + B2 * x2 + B3 * x3
+
+This script is the first step in creating matrix A, or computing coefficients in the linear regression:
+B0, B1, B2, B3
+
+Mappers calculate matrix A by emitting two types of tuples, combined for form a matrix:
+
+Type 1: matrix A
+(row1, x * transpose(x))
+(row2, x * transpose(x))
+.
+.
+.
+
+Type 2: vector b
+(row 1, x*y)
+(row 2, x*y)
+.
+.
+.
+
+
+Reducers sum above matrices by row, producing two final matrices:
+A = sum all Type 1 tuples from mapper
+b = sum all Type 2 tuples from mapper
+
+final solution to calculate coefficients is
+B = inverse(A) * b
+'''
 
 # testfile | ./mapper.py
 
@@ -12,7 +39,7 @@ import sys
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv("/Users/dallammasterson/gitRepos/mapReduce/linearReg/trainNew.csv", sep = "\t" )
+data = pd.read_csv("linearReg/trainNew.csv", sep = "\t" )
 dataM = np.matrix(data)
 
 # need to functionalize

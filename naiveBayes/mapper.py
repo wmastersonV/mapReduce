@@ -9,8 +9,8 @@ import sys
 import pandas as pd
 import numpy as np
 
-dfY = pd.read_csv("/Users/dallammasterson/gitRepos/mapReduce/naiveBayes/trainDependant.csv", sep = "\t")
-dfX = pd.read_csv("/Users/dallammasterson/gitRepos/mapReduce/naiveBayes/trainIndependant.csv", sep = "\t")
+dfY = pd.read_csv("naiveBayes/trainDependant.csv", sep = "\t")
+dfX = pd.read_csv("naiveBayes/trainIndependant.csv", sep = "\t")
 
 # initialize Y, X in example:
 predInput = dfY.iloc[1,:]
